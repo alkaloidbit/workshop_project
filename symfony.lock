@@ -1,4 +1,10 @@
 {
+    "blackfireio/blackfire-symfony-meta": {
+        "version": "1.0",
+        "recipe": {
+            "version": "1.0"
+        }
+    },
     "dama/doctrine-test-bundle": {
         "version": "4.0",
         "recipe": {
