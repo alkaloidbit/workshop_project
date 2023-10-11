@@ -25,7 +25,7 @@ final class AdminSituationController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'admin_post_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'admin_situation_new', methods: ['GET', 'POST'])]
     public function new(
         #[CurrentUser] User $user,
         Request $request,
@@ -51,7 +51,7 @@ final class AdminSituationController extends AbstractController
             // actions. They are deleted automatically from the session as soon
             // as they are accessed.
             // See https://symfony.com/doc/current/controller.html#flash-messages
-            $this->addFlash('success', 'situation.created_successfully');
+            $this->addFlash('success', 'Situation enregistrée');
 
             /** @var SubmitButton $submit */
             $submit = $form->get('saveAndCreateNew');

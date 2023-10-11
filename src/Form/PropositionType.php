@@ -11,7 +11,7 @@
 
 namespace App\Form;
 
-use App\Entity\Situation;
+use App\Entity\Proposition;
 use App\Form\Type\DateTimePickerType;
 use App\Form\Type\TagsInputType;
 use Symfony\Component\Form\AbstractType;
@@ -29,11 +29,10 @@ use Symfony\Component\String\Slugger\SluggerInterface;
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  * @author Yonel Ceruto <yonelceruto@gmail.com>
  */
-final class SituationType extends AbstractType
+final class PropositionType extends AbstractType
 {
     // Form types are services, so you can inject other services in them if needed
     public function __construct(
-        private readonly SluggerInterface $slugger
     ) {
     }
 
@@ -49,11 +48,8 @@ final class SituationType extends AbstractType
         // $builder->add('title', null, ['required' => false, ...]);
 
         $builder
-            ->add('context', TextareaType::class, [
+            ->add('content', TextareaType::class, [
                 'label' =>'Contexte'
-            ])
-            ->add('question', TextareaType::class, [
-                'label' =>'Question',
             ])
         ;
     }
@@ -61,7 +57,7 @@ final class SituationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Situation::class,
+            'data_class' => Proposition::class,
         ]);
     }
 }
