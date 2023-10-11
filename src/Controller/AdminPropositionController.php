@@ -20,7 +20,7 @@ class AdminPropositionController extends AbstractController
     #[Route('/', name: 'admin_proposition_index')]
     public function index(): Response
     {
-        return $this->render('admin_proposition/index.html.twig', [
+        return $this->render('admin/proposition/index.html.twig', [
             'controller_name' => 'AdminPropositionController',
         ]);
     }
@@ -58,7 +58,7 @@ class AdminPropositionController extends AbstractController
 				return $this->redirectToRoute('admin_proposition_index');
 		}
 		return $this->render('admin/proposition/new.html.twig', [
-				'proposition' => $situation,
+				'proposition' => $proposition,
 				'form' => $form,
 		]);
 

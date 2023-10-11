@@ -49,7 +49,7 @@ final class PropositionType extends AbstractType
 
         $builder
             ->add('content', TextareaType::class, [
-                'label' =>'Contexte'
+                'label' =>'Contenu'
             ])
         ;
     }
