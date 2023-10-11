@@ -25,9 +25,13 @@ class Situation
     #[ORM\OneToMany(mappedBy: 'situation', targetEntity: Answer::class, orphanRemoval: true)]
     private Collection $answers;
 
+    #[ORM\OneToMany(mappedBy: 'situation', targetEntity: Proposition::class, orphanRemoval: true)]
+    private Collection $propositions;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+        $this->propositions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -83,6 +87,36 @@ class Situation
             // set the owning side to null (unless already changed)
             if ($answer->getSituation() === $this) {
                 $answer->setSituation(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Proposition>
+     */
+    public function getPropositions(): Collection
+    {
+        return $this->propositions;
+    }
+
+    public function addProposition(Proposition $proposition): self
+    {
+        if (!$this->propositions->contains($proposition)) {
+            $this->propositions->add($proposition);
+            $proposition->setSituation($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProposition(Proposition $proposition): self
+    {
+        if ($this->propositions->removeElement($proposition)) {
+            // set the owning side to null (unless already changed)
+            if ($proposition->getSituation() === $this) {
+                $proposition->setSituation(null);
             }
         }
 
