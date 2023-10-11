@@ -1,6 +1,6 @@
 /public/build/fonts/glyphicons-*
 /public/build/images/glyphicons-*
-
+/public/uploads/
 .php-version
 
 ###> symfony/framework-bundle ###
