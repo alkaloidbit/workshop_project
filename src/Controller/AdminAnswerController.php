@@ -34,15 +34,14 @@ class AdminAnswerController extends AbstractController
     ): Response {
         $answer = new Answer();
         $form = $this->createForm(AnswerType::class, $answer)
-            ->add('saveAndCreateNew', SubmitType::class)
-        ;
+            ->add('saveAndCreateNew', SubmitType::class);
 
         $form->handleRequest($request);
 
         // the isSubmitted() method is completely optional because the other
         // isValid() method already checks whether the form is submitted.
-        // However, we explicitly add it to improve code readability.
         // See https://symfony.com/doc/current/forms.html#processing-forms
+        // However, we explicitly add it to improve code readability.
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($answer);
             $entityManager->flush();
@@ -67,5 +66,5 @@ class AdminAnswerController extends AbstractController
             'answer' => $answer,
             'form' => $form,
         ]);
-		}
+    }
 }

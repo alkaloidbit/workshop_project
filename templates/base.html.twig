@@ -55,6 +55,11 @@
                                         </li>
                                     {% endif %}
                                 {% endblock %}
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="{{ path('admin_situation_index') }}">
+                                                <i class="fa fa-lock" aria-hidden="true"></i> {{ 'Liste des situations'|trans }}
+                                            </a>
+                                        </li>
 
                                 <li class="nav-item{{ _route == 'blog_search' ? ' active' : '' }}">
                                     <a class="nav-link" href="{{ path('blog_search') }}"> <i class="fa fa-search"></i> {{ 'menu.search'|trans }}</a>

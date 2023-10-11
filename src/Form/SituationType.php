@@ -50,12 +50,12 @@ final class SituationType extends AbstractType
 
         $builder
             ->add('context', TextareaType::class, [
-                'label' =>'Contexte'
+                'label' => 'Contexte'
             ])
             ->add('question', TextareaType::class, [
-                'label' =>'Question',
+                'label' => 'Question',
             ])
-        ;
+            ->add('answers');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

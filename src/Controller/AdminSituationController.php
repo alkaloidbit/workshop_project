@@ -6,6 +6,7 @@ use App\Entity\Situation;
 use App\Entity\User;
 use App\Form\SituationType;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\SituationRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\SubmitButton;
@@ -18,10 +19,11 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 final class AdminSituationController extends AbstractController
 {
     #[Route('/', name: 'admin_situation_index')]
-    public function index(): Response
+    public function index(SituationRepository $situationRepository): Response
     {
-        return $this->render('admin_situation/index.html.twig', [
-            'controller_name' => 'AdminSituationController',
+				$situationsList = $situationRepository->findAll();
+					return $this->render('admin/situation/index.html.twig', [
+							'situations' => $situationsList,
         ]);
     }
 
