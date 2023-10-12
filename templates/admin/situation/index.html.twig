@@ -17,7 +17,6 @@
             <tr>
                 <td>{{ situation.context }}</td>
                 <td>{{ situation.question }}</td>
-                <td>{% for answer in }
             </tr>
         {% else %}
             <tr>
@@ -29,6 +28,11 @@
 {% endblock %}
 
 {% block sidebar %}
+    <div class="section actions">
+        <a href="{{ path('admin_situation_new') }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'Creer une nouvelle situation'|trans }}
+        </a>
+    </div>
     {{ parent() }}
 
     {{ show_source_code(_self) }}

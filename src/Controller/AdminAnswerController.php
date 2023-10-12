@@ -61,7 +61,7 @@ class AdminAnswerController extends AbstractController
                 return $this->redirectToRoute('admin_answer_index');
             }
 
-            return $this->redirectToRoute('admin_situation_index');
+            return $this->redirectToRoute('admin_answer_index');
         }
 
         return $this->render('admin/answer/new.html.twig', [

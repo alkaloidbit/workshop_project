@@ -9,15 +9,14 @@
         <thead>
             <tr>
                 <th scope="col">{{ 'Contenu'|trans }}</th>
-                <th scope="col">{{ 'Question'|trans }}</th>
+                <th scope="col">{{ 'Situation'|trans }}</th>
             </tr>
         </thead>
         <tbody>
         {% for answer in answers %}
             <tr>
                 <td>{{ answer.content }}</td>
-                <td>{{ answer.question }}</td>
-            </tr>
+                <td>{{ answer.getSituation().question }}</td>
         {% else %}
             <tr>
                 <td colspan="4" align="center">{{ 'Aucune situation'|trans }}</td>
@@ -28,6 +27,11 @@
 {% endblock %}
 
 {% block sidebar %}
+    <div class="section actions">
+        <a href="{{ path('admin_answer_new') }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'Creer une nouvelle réponse'|trans }}
+        </a>
+    </div>
     {{ parent() }}
 
     {{ show_source_code(_self) }}
