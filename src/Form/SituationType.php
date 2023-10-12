@@ -11,14 +11,12 @@
 
 namespace App\Form;
 
+use App\Entity\Answer;
 use App\Entity\Situation;
-use App\Form\Type\DateTimePickerType;
-use App\Form\Type\TagsInputType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -49,13 +47,19 @@ final class SituationType extends AbstractType
         // $builder->add('title', null, ['required' => false, ...]);
 
         $builder
-            ->add('context', TextareaType::class, [
-                'label' => 'Contexte'
+            ->add('explanation', TextareaType::class, [
+                'label' => 'Explication'
             ])
             ->add('question', TextareaType::class, [
                 'label' => 'Question',
             ])
-            ->add('answers');
+            ->add('answers', EntityType::class, [
+                'class' => Answer::class,
+                'multiple' => true,
+                'choice_label' => 'content',
+                'placeholder' => 'Choose an answer',
+                'required' => false
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

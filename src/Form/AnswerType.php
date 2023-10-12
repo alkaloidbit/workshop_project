@@ -16,11 +16,12 @@ class AnswerType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('valid', CheckboxType::class, ['label' => 'Estce la bonne réponse', 'required' => false])
+            ->add('valid', CheckboxType::class, ['label' => 'Est-ce la bonne réponse ?', 'required' => false])
             ->add('situation', EntityType::class, [
                 'class' => Situation::class,
                 'choice_label' => 'question',
-                'placeholder' => 'Choose a situation'
+                'placeholder' => 'Choose a situation',
+                'required' => false
             ]);
     }
 

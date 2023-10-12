@@ -5,7 +5,7 @@
 {% block main %}
     <h1>{{ 'Nouvelle Situation'|trans }}</h1>
     {{ form_start(form) }}
-        {{ form_row(form.context) }}
+        {{ form_row(form.explanation) }}
         {{ form_row(form.question) }}
 
         <button type="submit" class="btn btn-primary">

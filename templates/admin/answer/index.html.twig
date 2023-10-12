@@ -3,7 +3,7 @@
 {% block title %}Hello AdminAnswerController!{% endblock %}
 
 {% block main %}
-    <h1>{{ 'Liste de réponses'|trans }}</h1>
+    <h1>{{ 'Liste des réponses'|trans }}</h1>
 
     <table class="table table-striped table-middle-aligned table-borderless">
         <thead>
@@ -16,10 +16,14 @@
         {% for answer in answers %}
             <tr>
                 <td>{{ answer.content }}</td>
-                <td>{{ answer.getSituation().question }}</td>
+                {% if answer.getSituation() %}
+                  <td>{{ answer.getSituation().id }}</td>
+                {% else %}
+                  <td></td>
+                {% endif %}
         {% else %}
             <tr>
-                <td colspan="4" align="center">{{ 'Aucune situation'|trans }}</td>
+                <td colspan="4" align="center">{{ 'Aucune réponse'|trans }}</td>
            </tr>
         {% endfor %}
         </tbody>

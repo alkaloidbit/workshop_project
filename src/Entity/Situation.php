@@ -17,38 +17,22 @@ class Situation
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $context = null;
-
-    #[ORM\Column(type: Types::TEXT)]
     private ?string $question = null;
 
-    #[ORM\OneToMany(mappedBy: 'situation', targetEntity: Answer::class, orphanRemoval: true)]
-    private Collection $answers;
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $explanation = null;
 
-    #[ORM\OneToMany(mappedBy: 'situation', targetEntity: Proposition::class, orphanRemoval: true)]
-    private Collection $propositions;
+    #[ORM\OneToMany(mappedBy: 'situation', targetEntity: Answer::class)]
+    private Collection $answers;
 
     public function __construct()
     {
         $this->answers = new ArrayCollection();
-        $this->propositions = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getContext(): ?string
-    {
-        return $this->context;
-    }
-
-    public function setContext(string $context): self
-    {
-        $this->context = $context;
-
-        return $this;
     }
 
     public function getQuestion(): ?string
@@ -59,6 +43,18 @@ class Situation
     public function setQuestion(string $question): self
     {
         $this->question = $question;
+
+        return $this;
+    }
+
+    public function getExplanation(): ?string
+    {
+        return $this->explanation;
+    }
+
+    public function setExplanation(string $explanation): self
+    {
+        $this->explanation = $explanation;
 
         return $this;
     }
@@ -87,36 +83,6 @@ class Situation
             // set the owning side to null (unless already changed)
             if ($answer->getSituation() === $this) {
                 $answer->setSituation(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Proposition>
-     */
-    public function getPropositions(): Collection
-    {
-        return $this->propositions;
-    }
-
-    public function addProposition(Proposition $proposition): self
-    {
-        if (!$this->propositions->contains($proposition)) {
-            $this->propositions->add($proposition);
-            $proposition->setSituation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProposition(Proposition $proposition): self
-    {
-        if ($this->propositions->removeElement($proposition)) {
-            // set the owning side to null (unless already changed)
-            if ($proposition->getSituation() === $this) {
-                $proposition->setSituation(null);
             }
         }
 
