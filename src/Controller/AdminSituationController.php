@@ -21,9 +21,9 @@ final class AdminSituationController extends AbstractController
     #[Route('/', name: 'admin_situation_index')]
     public function index(SituationRepository $situationRepository): Response
     {
-				$situationsList = $situationRepository->findAll();
-					return $this->render('admin/situation/index.html.twig', [
-							'situations' => $situationsList,
+        $situationsList = $situationRepository->findAll();
+        return $this->render('admin/situation/index.html.twig', [
+            'situations' => $situationsList,
         ]);
     }
 
@@ -36,8 +36,7 @@ final class AdminSituationController extends AbstractController
         $situation = new Situation();
         // See https://symfony.com/doc/current/form/multiple_buttons.html
         $form = $this->createForm(SituationType::class, $situation)
-            ->add('saveAndCreateNew', SubmitType::class)
-        ;
+            ->add('saveAndCreateNew', SubmitType::class);
 
         $form->handleRequest($request);
 

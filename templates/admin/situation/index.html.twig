@@ -17,6 +17,7 @@
             <tr>
                 <td>{{ situation.context }}</td>
                 <td>{{ situation.question }}</td>
+                <td>{% for answer in }
             </tr>
         {% else %}
             <tr>
@@ -25,4 +26,10 @@
         {% endfor %}
         </tbody>
     </table>
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+
+    {{ show_source_code(_self) }}
 {% endblock %}

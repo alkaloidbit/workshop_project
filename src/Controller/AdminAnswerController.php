@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Answer;
 use App\Form\AnswerType;
+use App\Repository\AnswerRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -18,10 +19,11 @@ use Symfony\Component\Security\Http\Attribute\CurrentUser;
 class AdminAnswerController extends AbstractController
 {
     #[Route('/', name: 'admin_answer_index')]
-    public function index(): Response
+    public function index(AnswerRepository $answersRepository): Response
     {
-        return $this->render('admin_answer/index.html.twig', [
-            'controller_name' => 'AdminAnswerController',
+        $answersList = $answersRepository->findAll();
+        return $this->render('admin/answer/index.html.twig', [
+            'answers' => $answersList,
         ]);
     }
 
