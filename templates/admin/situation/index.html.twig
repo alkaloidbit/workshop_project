@@ -10,13 +10,15 @@
             <tr>
                 <th scope="col">{{ 'Explication'|trans }}</th>
                 <th scope="col">{{ 'Question'|trans }}</th>
+                <th scope="col">{{ 'Explication'|trans }}</th>
             </tr>
-        </thead>
+       </thead>
         <tbody>
         {% for situation in situations %}
             <tr>
                 <td>{{ situation.explanation }}</td>
                 <td>{{ situation.question }}</td>
+                <td>{{ situation.explanation }}</td>
             </tr>
         {% else %}
             <tr>
