@@ -52,13 +52,6 @@ final class SituationType extends AbstractType
             ])
             ->add('question', TextareaType::class, [
                 'label' => 'Question',
-            ])
-            ->add('answers', EntityType::class, [
-                'class' => Answer::class,
-                'multiple' => true,
-                'choice_label' => 'content',
-                'placeholder' => 'Choose an answer',
-                'required' => false
             ]);
     }
 
