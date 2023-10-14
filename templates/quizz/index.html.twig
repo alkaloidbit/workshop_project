@@ -1,15 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/style.css">
+    <title>Examen du Permis de Conduire</title>
+</head>
+<body>
+    <div class="slide-container">
+        <div class="image-container">
+            <img src="" id="main_image" alt="Illustration" class="slide-image">
+        </div>
 
-{% extends 'base.html.twig' %}
+        <h1 id="question-title"></h1>
+        <p id="question-text"></p>
 
-{% block body_id 'quizz_index' %}
+        <div class="options" id="options-container"></div>
+        <div id="result-container">
+            <h1 id="result"></h1>
+            <p id="explanation"></p>
+            <button id="nextButton" class="nextButton" onclick="nextQuestion()" >Suivant</button>
+        </div>
+        <img src="./logo.png" class="logo" alt="">
+    </div>
 
-{% block main %}
-
-{% endblock %}
-
-{% block sidebar %}
-    {{ parent() }}
-
-    {{ show_source_code(_self) }}
-    {{ include('blog/_rss.html.twig') }}
-{% endblock %}
+    <script src="script.js"></script>
+</body>
+</html>
