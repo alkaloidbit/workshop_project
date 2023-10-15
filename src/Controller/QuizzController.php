@@ -14,9 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class QuizzController extends AbstractController
 {
     #[Route('/', name: 'quizz_index', defaults: ['page' => '1', '_format' => 'html'], methods: ['GET'])]
-    public function index(): Response
+    public function index(SituationRepository $situationRepository): Response
     {
-        return $this->render('quizz/index.html.twig', []);
+        $countQuestions = $situationRepository->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+
+
+        return $this->render('quizz/index.html.twig', [
+            'countQuestions' => $countQuestions
+        ]);
     }
 
     #[Route('/getJsonSituation', name: 'situation_json', methods: ['GET'])]

@@ -54,6 +54,7 @@ const questions = [
 ];
 
 let currentQuestionIndex = 0;
+let countQuestions = window.countQuestions;
 let score = 0;
 
 function initializeFirstQuestion() {
@@ -152,7 +153,7 @@ function nextQuestion() {
 
   currentQuestionIndex++;
 
-  if (currentQuestionIndex < 4) {
+  if (currentQuestionIndex < countQuestions) {
     initializeQuestion();
   } else {
     const finalContainer = document.querySelector(".slide-container");
