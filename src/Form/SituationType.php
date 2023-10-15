@@ -11,14 +11,12 @@
 
 namespace App\Form;
 
-use App\Entity\Answer;
 use App\Entity\Situation;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\String\Slugger\SluggerInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 /**
  * Defines the form used to create and manipulate  situations.
@@ -30,9 +28,8 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 final class SituationType extends AbstractType
 {
     // Form types are services, so you can inject other services in them if needed
-    public function __construct(
-        private readonly SluggerInterface $slugger
-    ) {
+    public function __construct()
+    {
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -52,6 +49,15 @@ final class SituationType extends AbstractType
             ])
             ->add('question', TextareaType::class, [
                 'label' => 'Question',
+            ])
+            ->add('imageFile', VichImageType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => '...',
+                'download_label' => '...',
+                'download_uri' => true,
+                'image_uri' => true,
+                'asset_helper' => true,
             ]);
     }
 

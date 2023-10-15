@@ -1,0 +1,39 @@
+const questions = [
+      question: "Quelle est la définition du harcèlement sexuel au travail ?",
+      options: [
+          "A Toute forme de comportement verbal, non verbal ou physique à connotation sexuelle ayant pour objet ou pour effet de porter atteinte à la dignité d'une personne.",
+          "B Un compliment occasionnel sur l'apparence physique d'un collègue."
+      ],
+      correctAnswer: 0,
+      explanation: "Le harcèlement sexuel au travail est défini comme toute forme de comportement à connotation sexuelle portant atteinte à la dignité d'une personne. Selon la loi, il peut inclure des avances non désirées, des commentaires offensants, des demandes sexuelles, ou d'autres comportements similaires."
+
+
+      question: "Que devrait faire une personne victime de harcèlement sexuel au travail ?",
+      options: [
+          "A Se taire et ignorer les comportements pour éviter des problèmes.",
+          "B Signaler le harcèlement à son supérieur hiérarchique, aux ressources humaines ou à toute personne de confiance."
+      ],
+      correctAnswer: 1,
+      explanation: "La personne victime de harcèlement sexuel devrait signaler les faits à son supérieur hiérarchique, aux ressources humaines ou à toute personne de confiance. Il est important de prendre des mesures immédiates pour résoudre la situation et éviter qu'elle ne persiste."
+      
+
+      question: "Quelle est la responsabilité de l'employeur face au harcèlement sexuel au travail ?",
+      options: [
+          "A Ignorer les plaintes des employés pour éviter des complications.",
+          "B Prendre des mesures préventives, former le personnel et traiter les plaintes de manière sérieuse et confidentielle."
+      correctAnswer: 1,
+      explanation: "L'employeur a la responsabilité de prendre des mesures préventives, de former le personnel et de traiter les plaintes de manière sérieuse et confidentielle. Cela peut inclure la mise en place de politiques anti-harcèlement, des sessions de sensibilisation et la création d'un environnement où les employés se sentent en sécurité pour signaler tout incident."
+
+  Martine demande à son collègue Jules d'appuyer sur le bouton de l'ascenseur dont il bloque le passage afin de se rendre au troisième étage.
+  Jules lui répond: "Tu sais que pour toi je ferais tout".
+  C'est la troisième fois aujourd'hui que Jules lui fait cette remarque (la première pour une agrafeuse, la seconde pour un dossier).
+  A présent Martine est gênée lorsqu'elle doit s'adresser à Jules. Mais elle se dit qu'il ne fait rien de mal au fond et que c'est plutôt elle qui devrait se détendre un peu.
+  Martine a-t-elle raison ?
+
+A Oui. Les enjeux du monde professionnel exercent parfois une forme de pression sur les employés. Il est normal que ceux-ci adoptent un comportement un peu plus léger parfois, comme Jules, sans que cela soit condamnable pour autant.
+B Non. Elle a tort. Martine devrait en référer à son responsable et demander à Jules de cesser ses remarques.
+
+Explication
+Ce que fait Jules s'appelle du harcèlement sexuel et est condamnable par la loi.
+Jules devrait cesser sur le champs ce genre d'agissement même si son intention est de complimenter Martine ou de faire de l'humour.
+Martine pourrait en référer à son responsable et Jules devrait-être sanctionné.
