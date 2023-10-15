@@ -23,4 +23,4 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
-6ms2w6cipktxg--new-feature-av6wahy--db--main--dump.sql
+*.sql
