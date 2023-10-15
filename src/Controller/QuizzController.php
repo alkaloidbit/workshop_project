@@ -31,4 +31,10 @@ class QuizzController extends AbstractController
             'situation' => $situation
         ], 200, [], ['groups' => ['situation:read']]);
     }
+
+    #[Route('/')]
+    public function certificationForm()
+    {
+        # code...
+    }
 }

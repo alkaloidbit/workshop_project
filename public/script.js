@@ -63,6 +63,14 @@ function initializeFirstQuestion() {
   initializeQuestion();
 }
 
+async function getJsonSituation(id_situation) {
+  const response = await fetch(
+    "http://localhost:8000/fr/quizz/getJsonSituation?id_situation=" +
+      id_situation,
+  );
+  return response.json();
+}
+
 function initializeQuestion() {
   const questionContainer = document.querySelector(".slide-container");
   const optionsContainer = document.querySelector(".options");
@@ -70,23 +78,26 @@ function initializeQuestion() {
   document.getElementById("question-title").innerText = `Question ${
     currentQuestionIndex + 1
   }`;
-  document.getElementById("question-text").innerText =
-    questions[currentQuestionIndex].question;
 
-  document.getElementById("main_image").src =
-    questions[currentQuestionIndex].image_path;
+  getJsonSituation(currentQuestionIndex + 1).then((data) => {
+    document.getElementById("question-text").innerText =
+      data.situation.question;
 
-  const options = questions[currentQuestionIndex].options;
-  optionsContainer.innerHTML = "";
+    document.getElementById("main_image").src =
+      "http://localhost:8000/uploads/images/" + data.situation.imageName;
 
-  options.forEach((option, index) => {
-    const button = document.createElement("button");
-    button.innerText = option;
-    button.onclick = function () {
-      selectAnswer(index);
-    };
+    const options = data.situation.answers;
+    optionsContainer.innerHTML = "";
 
-    optionsContainer.appendChild(button);
+    options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.innerText = option.content;
+      button.onclick = function () {
+        selectAnswer(index, data);
+      };
+
+      optionsContainer.appendChild(button);
+    });
   });
 }
 
@@ -94,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
   initializeFirstQuestion();
 });
 
-function selectAnswer(index) {
+function selectAnswer(index, data) {
   const selectedOption = document.querySelector(".options .selected");
   if (selectedOption) {
     selectedOption.classList.remove("selected");
@@ -102,17 +113,17 @@ function selectAnswer(index) {
 
   document.querySelectorAll(".options button")[index].classList.add("selected");
 
-  checkAnswer();
+  checkAnswer(data);
 }
 
-function checkAnswer() {
+function checkAnswer(data) {
   const selectedOption = document.querySelector(".options .selected");
   if (selectedOption) {
     const selectedIndex = Array.from(
       selectedOption.parentNode.children,
     ).indexOf(selectedOption);
 
-    if (selectedIndex === questions[currentQuestionIndex].correctAnswer) {
+    if (selectedIndex === data.situation.correctAnswer) {
       score += 10;
       document.getElementById("result").innerText = "Bonne réponse! +10 points";
     } else {
@@ -121,7 +132,7 @@ function checkAnswer() {
     }
 
     document.getElementById("explanation").innerText =
-      questions[currentQuestionIndex].explanation;
+      data.situation.explanation;
 
     document
       .querySelectorAll(".options button")
