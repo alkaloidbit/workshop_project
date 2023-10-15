@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire Diplôme</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #diplome {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="diplome">
+    <!-- Le contenu de ton diplôme PDF irait ici -->
+    <p>Congratulations!</p>
+</div>
+
+<div>
+    <h2>Bienvenue à la Cérémonie de Remise de Diplôme</h2>
+    <p>Félicitations pour avoir réussi le Quiz sur le Harcèlement Sexuel. Vous êtes invité(e) à recevoir votre diplôme personnalisé!</p>
+    <ol style="list-style-position: inside; padding-left: 0;">
+        <li>Entrez votre nom dans le formulaire ci-dessous.</li>
+        <li>Cliquez sur "Générer Diplôme".</li>
+        <li>Téléchargez votre diplôme unique en PDF.</li>
+    </ol>
+</div>
+
+<form id="form">
+  <label for="name">Nom:</label>
+      <input type="text" id="name" required>
+      <button type="button" onclick='window.location.href = "certif.pdf"'>Générer Diplôme</button>
+</form>
+
+<p>Aucune donnée personnelle n'est conservée par notre site via ce formulaire.</p>
+<p>L’adresse IP de connexion est cryptée par l’outil de mesure d’audience de manière à rendre impossible l’identification et la localisation de l’utilisateur.</a>
+<script>
+    function generateCertificate() {
+        // Récupérer les données du formulaire
+        var name = document.getElementById('name').value;
+
+        // Générer le diplôme en PDF avec le nom
+        var pdf = new jsPDF();
+        pdf.text(20, 30, 'Félicitations à');
+        pdf.text(20, 50, name);
+        pdf.text(20, 70, 'pour avoir brillamment réussi le quiz sur le harcèlement sexuel.');
+
+        // Afficher le diplôme dans la page (à titre d'exemple)
+        document.getElementById('diplome').innerHTML = '<iframe width="100%" height="400px" src="' + pdf.output('datauristring') + '"></iframe>';
+    }
+</script>
+
+</body>
+</html>

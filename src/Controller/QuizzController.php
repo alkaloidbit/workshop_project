@@ -32,9 +32,9 @@ class QuizzController extends AbstractController
         ], 200, [], ['groups' => ['situation:read']]);
     }
 
-    #[Route('/')]
-    public function certificationForm()
+    #[Route('/certificate', name: 'certificate_form', methods: ['GET'])]
+    public function certificationForm(): Response
     {
-        # code...
+        return $this->render('quizz/certificate_form.html.twig', []);
     }
 }

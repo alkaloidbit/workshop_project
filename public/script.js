@@ -64,10 +64,7 @@ function initializeFirstQuestion() {
 }
 
 async function getJsonSituation(id_situation) {
-  const response = await fetch(
-    "http://localhost:8000/fr/quizz/getJsonSituation?id_situation=" +
-      id_situation,
-  );
+  const response = await fetch("getJsonSituation?id_situation=" + id_situation);
   return response.json();
 }
 
@@ -84,7 +81,7 @@ function initializeQuestion() {
       data.situation.question;
 
     document.getElementById("main_image").src =
-      "http://localhost:8000/uploads/images/" + data.situation.imageName;
+      "/uploads/images/" + data.situation.imageName;
 
     const options = data.situation.answers;
     optionsContainer.innerHTML = "";
@@ -155,7 +152,7 @@ function nextQuestion() {
 
   currentQuestionIndex++;
 
-  if (currentQuestionIndex < questions.length) {
+  if (currentQuestionIndex < 4) {
     initializeQuestion();
   } else {
     const finalContainer = document.querySelector(".slide-container");
@@ -187,6 +184,6 @@ function nextQuestion() {
     text +=
       '<a class="lienblanc" href="https://questionsexualite.fr/lutter-contre-les-violences-et-discriminations/les-violences-sexistes-et-sexuelles/qu-est-ce-que-le-harcelement-sexuel-et-quelles-sont-les-sanctions" />Harcèlement sexuel et sanctions, que faut-il savoir ?</a>';
     finalContainer.innerHTML += `<div>${text}</div>`;
-    finalContainer.innerHTML += `<div><a href="./form-certif.html" class="nextButton lastbutton">Suivant</a></div>`;
+    finalContainer.innerHTML += `<div><a href="certificate" class="nextButton lastbutton">Suivant</a></div>`;
   }
 }
