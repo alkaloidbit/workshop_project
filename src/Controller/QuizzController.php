@@ -11,14 +11,12 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/quizz')]
 class QuizzController extends AbstractController
 {
-
-
     #[Route('/', name: 'quizz_index', defaults: ['page' => '1', '_format' => 'html'], methods: ['GET'])]
     public function index(Request $request, SituationRepository $situationRepository): Response
     {
         $situations = $situationRepository->findAll();
-        return $this->render('quizz/index.html.twig', [
+        return $this->json([
             'situations' => $situations
-        ]);
+        ], 200, [], ['groups' => ['situation:read']]);
     }
 }

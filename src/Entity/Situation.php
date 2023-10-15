@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: SituationRepository::class)]
@@ -17,24 +18,29 @@ class Situation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("situation:read")]
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("situation:read")]
     private ?string $question = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups("situation:read")]
     private ?string $explanation = null;
 
     #[Vich\UploadableField(mapping: 'situations', fileNameProperty: 'imageName')]
     private ?File $imageFile = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups("situation:read")]
     private ?string $imageName = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'situation', targetEntity: Answer::class)]
+    #[Groups("situation:read")]
     private Collection $answers;
 
     public function __construct()
