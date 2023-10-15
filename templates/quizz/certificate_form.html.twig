@@ -67,10 +67,10 @@
     </ol>
 </div>
 
-<form id="form">
+<form id="form" method="post" action="generate_pdf">
   <label for="name">Nom:</label>
-      <input type="text" id="name" required>
-      <button type="button" onclick='window.location.href = "certif.pdf"'>Générer Diplôme</button>
+      <input type="text" id="name" name="student_name" required>
+      <button type="submit" onclick="">Générer Diplôme</button>
 </form>
 
 <p>Aucune donnée personnelle n'est conservée par notre site via ce formulaire.</p>

@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Repository\SituationRepository;
+use setasign\Fpdi\Fpdi;
+use setasign\Fpdi\PdfReader\PageBoundaries;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -36,5 +38,26 @@ class QuizzController extends AbstractController
     public function certificationForm(): Response
     {
         return $this->render('quizz/certificate_form.html.twig', []);
+    }
+
+    #[Route('/generate_pdf', name: 'generate_pdf')]
+    public function generatePdf(Request $request): void
+    {
+        $student_name = $request->request->get('student_name', 'etudiant_lambda');
+        $file = 'uploads/blank_certificate.pdf';
+        $pdf = new Fpdi();
+        $pageCount = $pdf->setSourceFile($file);
+        $pageId = $pdf->importPage(1, PageBoundaries::MEDIA_BOX);
+        $size = $pdf->getTemplateSize($pageId);
+
+        $pdf->AddPage($size['orientation'], array($size['width'], $size['height']));
+
+        $pdf->useTemplate($pageId);
+
+        $pdf->SetFont('Arial', '', 35);
+        $pdf->SetXY(100, 80);
+        $text = utf8_decode($student_name);
+        $pdf->Write(0, $text);
+        $pdf->Output('I', 'generated.pdf');
     }
 }
