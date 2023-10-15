@@ -1,4 +1,4 @@
 # The name of the service container. Must be unique within a project.
 db:
-  type: mariadb:10.11
+  type: mariadb:10.5.8
   disk: 256
