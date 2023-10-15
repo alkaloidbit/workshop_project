@@ -43,9 +43,22 @@ class Situation
     #[Groups("situation:read")]
     private Collection $answers;
 
+    #[Groups("situation:read")]
+    private $correctAnswer;
+
     public function __construct()
     {
         $this->answers = new ArrayCollection();
+    }
+
+    public function getCorrectAnswer(): ?int
+    {
+        return $this->correctAnswer;
+    }
+
+    public function setCorrectAnswer(?int $index): void
+    {
+        $this->correctAnswer = $index;
     }
 
     public function getId(): ?int
