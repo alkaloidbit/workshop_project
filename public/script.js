@@ -190,6 +190,8 @@ function nextQuestion() {
     finalContainer.innerHTML += `<div>${text}</div>`;
     if (certificate) {
       finalContainer.innerHTML += `<div><a href="certificate" class="nextButton lastbutton">Suivant</a></div>`;
+    } else {
+      finalContainer.innerHTML += `<div><a href="/" class="nextButton lastbutton">Retour au quizz</a></div>`;
     }
   }
 }
