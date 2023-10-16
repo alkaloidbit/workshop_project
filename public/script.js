@@ -160,6 +160,7 @@ function nextQuestion() {
     finalContainer.innerHTML = `<h1>Score final: ${score}</h1>`;
 
     let text = "";
+    let certificate = true;
     if (score >= 30) {
       text =
         "Félicitations! Vous avez démontré une compréhension approfondie des problématiques de harcèlement sexuel au travail. Votre sensibilité à ce sujet est précieuse pour créer des environnements de travail sûrs et respectueux.";
@@ -169,6 +170,7 @@ function nextQuestion() {
     } else {
       text =
         "Il semble y avoir des aspects des problématiques de harcèlement sexuel au travail qui nécessitent davantage d'attention. Recherchez des ressources supplémentaires pour renforcer vos connaissances et contribuer à la prévention.";
+      certificate = false;
     }
 
     text += "<br><br>";
@@ -184,7 +186,10 @@ function nextQuestion() {
 
     text +=
       '<a class="lienblanc" href="https://questionsexualite.fr/lutter-contre-les-violences-et-discriminations/les-violences-sexistes-et-sexuelles/qu-est-ce-que-le-harcelement-sexuel-et-quelles-sont-les-sanctions" />Harcèlement sexuel et sanctions, que faut-il savoir ?</a>';
+
     finalContainer.innerHTML += `<div>${text}</div>`;
-    finalContainer.innerHTML += `<div><a href="certificate" class="nextButton lastbutton">Suivant</a></div>`;
+    if (certificate) {
+      finalContainer.innerHTML += `<div><a href="certificate" class="nextButton lastbutton">Suivant</a></div>`;
+    }
   }
 }
