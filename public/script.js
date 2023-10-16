@@ -191,7 +191,7 @@ function nextQuestion() {
     if (certificate) {
       finalContainer.innerHTML += `<div><a href="certificate" class="nextButton lastbutton">Suivant</a></div>`;
     } else {
-      finalContainer.innerHTML += `<div><a href="/" class="nextButton lastbutton">Retour au quizz</a></div>`;
+      finalContainer.innerHTML += `<div><a href="/quizz" class="nextButton lastbutton">Retour au quizz</a></div>`;
     }
   }
 }
