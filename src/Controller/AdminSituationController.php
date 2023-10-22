@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\SituationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SituationRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\SubmitButton;
@@ -68,5 +69,58 @@ final class AdminSituationController extends AbstractController
             'situation' => $situation,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/{id<\d+>}', name: 'admin_situation_show', methods: ['GET'])]
+    public function show(Situation $situation): Response
+    {
+        return $this->render('admin/situation/show.html.twig', [
+            'situation' => $situation
+        ]);
+    }
+
+
+    #[Route('/{id<\d+>}/edit', name: 'admin_situation_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Situation $situation, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(SituationType::class, $situation);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            $this->addFlash('success', 'post.updated_successfully');
+
+            return $this->redirectToRoute('admin_situation_edit', ['id' => $situation->getId()]);
+        }
+
+        return $this->render('admin/situation/edit.html.twig', [
+            'situation' => $situation,
+            'form' => $form,
+        ]);
+    }
+
+    /**
+     * Deletes a Post entity.
+     */
+    #[Route('/{id}/delete', name: 'admin_situation_delete', methods: ['POST'])]
+    public function delete(Request $request, Situation $situation, EntityManagerInterface $entityManager): Response
+    {
+        /** @var string|null $token */
+        $token = $request->request->get('token');
+
+        if (!$this->isCsrfTokenValid('delete', $token)) {
+            return $this->redirectToRoute('admin_situation_index');
+        }
+
+        // Delete the tags associated with this blog post. This is done automatically
+        // by Doctrine, except for SQLite (the database used in this application)
+        // because foreign key support is not enabled by default in SQLite
+
+        $entityManager->remove($situation);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'situation.deleted_successfully');
+
+        return $this->redirectToRoute('admin_situation_index');
     }
 }

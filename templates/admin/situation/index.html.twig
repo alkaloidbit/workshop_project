@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/layout.html.twig' %}
 
 {% block title %}Hello AdminSituationController!{% endblock %}
 
@@ -14,11 +14,22 @@
             </tr>
        </thead>
         <tbody>
-        <tr>
         {% for situation in situations %}
+            <tr>
                 <td>{{ situation.question }}</td>
                 <td>{{ situation.explanation }}</td>
                 <td>{{ situation.imageName }}</td>
+                <td class="text-right">
+                    <div class="item-actions">
+                        <a href="{{ path('admin_situation_show', {id: situation.id}) }}" class="btn btn-sm btn-secondary">
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{ 'action.show'|trans }}
+                        </a>
+
+                        <a href="{{ path('admin_situation_edit', {id: situation.id}) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit'|trans }}
+                        </a>
+                    </div>
+                </td>
             </tr>
         {% else %}
             <tr>
