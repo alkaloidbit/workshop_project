@@ -9,16 +9,16 @@
         <thead>
             <tr>
                 <th scope="col">{{ 'Question'|trans }}</th>
-                <th scope="col">{{ 'Explication'|trans }}</th>
+                <!-- <th scope="col">{{ 'Explication'|trans }}</th> -->
                 <th scope="col">{{ 'image'|trans }}</th>
             </tr>
        </thead>
         <tbody>
         {% for situation in situations %}
             <tr>
-                <td>{{ situation.question }}</td>
-                <td>{{ situation.explanation }}</td>
-                <td>{{ situation.imageName }}</td>
+                <td>{{ situation.question|u.truncate(30, '...') }}</td>
+                <!-- <td>{{ situation.explanation|u.truncate(100, '...') }}</td> -->
+                <td><img src="{{ asset('uploads/images/' ~ situation.imageName ) | imagine_filter('squared_thumbnail_small') }}"</td>
                 <td class="text-right">
                     <div class="item-actions">
                         <a href="{{ path('admin_situation_show', {id: situation.id}) }}" class="btn btn-sm btn-secondary">

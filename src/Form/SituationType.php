@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vich\UploaderBundle\Form\Type\VichImageType;
 
+
 /**
  * Defines the form used to create and manipulate  situations.
  *
@@ -53,10 +54,11 @@ final class SituationType extends AbstractType
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
                 'allow_delete' => true,
-                'delete_label' => '...',
-                'download_label' => '...',
+                'delete_label' => 'Remove image',
+                'download_label' => 'Download image',
                 'download_uri' => true,
                 'image_uri' => true,
+                'imagine_pattern' => 'squared_thumbnail_small',
                 'asset_helper' => true,
             ]);
     }
