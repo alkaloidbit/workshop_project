@@ -84,6 +84,10 @@
                 <source>title.edit_post</source>
                 <target>Modifier l'article #{id, number}</target>
             </trans-unit>
+            <trans-unit id="title.edit_situation">
+                <source>title.edit_situation</source>
+                <target>Modifier la situation #{id, number}</target>
+            </trans-unit>
             <trans-unit id="title.add_comment">
                 <source>title.add_comment</source>
                 <target>Laisser un commentaire</target>
@@ -101,6 +105,10 @@
                 <target>Modifier le mot de passe</target>
             </trans-unit>
 
+            <trans-unit id="action.show_situation">
+                <source>action.show_situation</source>
+                <target>Voir la situation</target>
+            </trans-unit>
             <trans-unit id="action.show">
                 <source>action.show</source>
                 <target>Voir</target>
@@ -128,6 +136,10 @@
             <trans-unit id="action.delete_post">
                 <source>action.delete_post</source>
                 <target>Supprimer l'article</target>
+            </trans-unit>
+            <trans-unit id="action.delete_situation">
+                <source>action.delete_situation</source>
+                <target>Supprimer la situation</target>
             </trans-unit>
             <trans-unit id="delete_post_modal.title">
                 <source>delete_post_modal.title</source>
