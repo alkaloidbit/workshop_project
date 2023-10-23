@@ -55,11 +55,13 @@ final class SituationType extends AbstractType
                 'required' => false,
                 'allow_delete' => true,
                 'delete_label' => 'Remove image',
+                'asset_helper' => true,
+                'download_uri' => static function () {
+                    return 'blablablablablablablabla';
+                },
                 'download_label' => 'Download image',
-                'download_uri' => true,
                 'image_uri' => true,
                 'imagine_pattern' => 'squared_thumbnail_small',
-                'asset_helper' => true,
             ]);
     }
 

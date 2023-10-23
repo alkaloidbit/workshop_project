@@ -7,7 +7,6 @@ use App\Entity\User;
 use App\Form\SituationType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\SituationRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\SubmitButton;

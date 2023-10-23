@@ -90,6 +90,16 @@ class Situation
         return $this->imageName;
     }
 
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
     public function getQuestion(): ?string
     {
         return $this->question;

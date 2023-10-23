@@ -1,5 +1,5 @@
 {
-    "$schema": "/home/fred-badlieutenant/.local/share/nvim/mason/packages/phpactor/phpactor.schema.json",
+    "$schema": "/usr/lib/phpactor/phpactor.schema.json",
     "language_server_phpstan.enabled": false,
     "symfony.enabled": true,
     "indexer.exclude_patterns": [

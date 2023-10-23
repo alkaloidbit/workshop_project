@@ -1,0 +1,38 @@
+
+{% extends 'admin/layout.html.twig' %}
+
+{% block body_id 'admin_situation_show' %}
+
+{% block main %}
+    <h1>{{ situation.question }}</h1>
+
+    <p class="situation-metadata">
+        <span class="metadata"><i class="fa fa-calendar"></i> {{ situation.updatedAt|format_datetime('long', 'medium', '', 'UTC') }}</span>
+    </p>
+
+    <div>
+      <img src="{{ asset('uploads/images/' ~ situation.imageName) }}" alt="">
+    </div>
+
+    <div class="jumbotron">
+        <p class="mb-0"><strong>{{ 'Explication'|trans }}</strong>: {{ situation.explanation }}</p>
+    </div>
+
+
+{% endblock %}
+
+{% block sidebar %}
+    <div class="section">
+        <a href="{{ path('admin_situation_edit', {id: situation.id}) }}" class="btn btn-lg btn-block btn-success">
+            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'action.edit_contents'|trans }}
+        </a>
+    </div>
+
+    <div class="section">
+        {{ include('admin/situation/_delete_form.html.twig', {situation: situation}, with_context = false) }}
+    </div>
+
+    {{ parent() }}
+
+    {{ show_source_code(_self) }}
+{% endblock %}
