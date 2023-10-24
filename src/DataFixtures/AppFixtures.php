@@ -11,8 +11,10 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Answer;
 use App\Entity\Comment;
 use App\Entity\Post;
+use App\Entity\Situation;
 use App\Entity\Tag;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -35,6 +37,38 @@ final class AppFixtures extends Fixture
         $this->loadUsers($manager);
         $this->loadTags($manager);
         $this->loadPosts($manager);
+        $this->loadSituations($manager);
+        $this->loadAnswers($manager);
+    }
+
+    private function loadSituations(ObjectManager $manager): void
+    {
+        foreach ($this->getSituationData() as $key => $situation) {
+            $situation = new Situation();
+            $situation->setQuestion($situation[0]);
+            $situation->setExplanation($situation[1]);
+            $situation->setImageName($situation[2]);
+
+            $manager->persist($situation);
+            $this->addReference('situation' . '_' . $key, $situation);
+        }
+
+        $manager->flush();
+    }
+
+    private function loadAnswers(ObjectManager $manager): void
+    {
+        foreach ($this->getAnswerData() as $key => $answers) {
+            foreach ($answers as $answer) {
+                $answer = new Answer();
+                $answer->setContent($answer[0]);
+                $answer->setValid($answer[1]);
+                $answer->setSituation($this->getReference('situation_' . $key));
+
+                $manager->persist($answer);
+            }
+        }
+        $manager->flush();
     }
 
     private function loadUsers(ObjectManager $manager): void
@@ -60,7 +94,7 @@ final class AppFixtures extends Fixture
             $tag = new Tag($name);
 
             $manager->persist($tag);
-            $this->addReference('tag-'.$name, $tag);
+            $this->addReference('tag-' . $name, $tag);
         }
 
         $manager->flush();
@@ -85,7 +119,7 @@ final class AppFixtures extends Fixture
                 $comment = new Comment();
                 $comment->setAuthor($commentAuthor);
                 $comment->setContent($this->getRandomText(random_int(255, 512)));
-                $comment->setPublishedAt(new \DateTime('now + '.$i.'seconds'));
+                $comment->setPublishedAt(new \DateTime('now + ' . $i . 'seconds'));
 
                 $post->addComment($comment);
             }
@@ -106,6 +140,42 @@ final class AppFixtures extends Fixture
             ['Jane Doe', 'jane_admin', 'kitten', 'jane_admin@symfony.com', [User::ROLE_ADMIN]],
             ['Tom Doe', 'tom_admin', 'kitten', 'tom_admin@symfony.com', [User::ROLE_ADMIN]],
             ['John Doe', 'john_user', 'kitten', 'john_user@symfony.com', [User::ROLE_USER]],
+        ];
+    }
+    /**
+     * @return array<array{string,string,string}>
+     */
+    private function getSituationData(): array
+    {
+        return [
+            ["Quelle est la définition du harcèlement sexuel au travail ?", "Le harcèlement sexuel au travail est défini comme toute forme de comportement à connotation sexuelle portant atteinte à la dignité d'une personne. Selon la loi, il peut inclure des avances non désirées, des commentaires offensants, des demandes sexuelles, ou d'autres comportements similaires.", "image1-652bd8d709caa937728073.png"],
+            ["Que devrait faire une personne victime de harcèlement sexuel au travail ?", "La personne victime de harcèlement sexuel devrait signaler les faits à son supérieur hiérarchique, aux ressources humaines ou à toute personne de confiance. Il est important de prendre des mesures immédiates pour résoudre la situation et éviter qu'elle ne persiste.", "image5-652bd9948f77f860920210.jpg"],
+            ["Quelle est la responsabilité de l'employeur face au harcèlement sexuel au travail ?", "L'employeur a la responsabilité de prendre des mesures préventives, de former le personnel et de traiter les plaintes de manière sérieuse et confidentielle. Cela peut inclure la mise en place de politiques anti-harcèlement, des sessions de sensibilisation et la création d'un environnement où les employés se sentent en sécurité pour signaler tout incident.", "image7-652bd9f1425fa711874062.jpg"],
+            ["Martine demande à son collègue Jules d'appuyer sur le bouton de l'ascenseur dont il bloque le passage afin de se rendre au troisième étage. Jules lui répond: 'Tu sais que pour toi je ferais tout'. C'est la troisième fois aujourd'hui que Jules lui fait cette remarque (la première pour une agrafeuse, la seconde pour un dossier) A présent Martine est gênée lorsqu'elle doit s'adresser à Jules. Mais elle se dit qu'il ne fait rien de mal au fond et que c'est plutôt elle qui devrait se détendre un peu. Martine a-t-elle raison ?", "Ce que fait Jules s'appelle du harcèlement sexuel et est condamnable par la loi. Jules devrait cesser sur le champs ce genre d'agissement même si son intention est de complimenter Martine ou de faire de l'humour. Martine pourrait en référer à son responsable et Jules devrait-être sanctionné.", "image77-652bdb1ce989b410530076.jpg"],
+        ];
+    }
+    /**
+     * @return array<array{string,bool}>
+     */
+    private function getAnswerData(): array
+    {
+        return  [
+            [
+                ["A Toute forme de comportement verbal, non verbal ou physique à connotation sexuelle ayant pour objet ou pour effet de porter atteinte à la dignité d'une personne.", 1],
+                ["B Un compliment occasionnel sur l'apparence physique d'un collègue.", 0],
+            ],
+            [
+                ["A Se taire et ignorer les comportements pour éviter des problèmes.", 0],
+                ["B Signaler le harcèlement à son supérieur hiérarchique, aux ressources humaines ou à toute personne de confiance.", 1],
+            ],
+            [
+                ["A Ignorer les plaintes des employés pour éviter des complications.", 0],
+                ["B Prendre des mesures préventives, former le personnel et traiter les plaintes de manière sérieuse et confidentielle.", 1],
+            ],
+            [
+                ["A Oui. Les enjeux du monde professionnel exercent parfois une forme de pression sur les employés. Il est normal que ceux-ci adoptent un comportement un peu plus léger parfois, comme Jules, sans que cela soit condamnable pour autant.", 0],
+                ["B Non. Elle a tort. Martine devrait en référer à son responsable et demander à Jules de cesser ses remarques.", 1],
+            ],
         ];
     }
 
@@ -130,8 +200,7 @@ final class AppFixtures extends Fixture
     /**
      * @throws \Exception
      *
-     * @return array<int, array{0: string, 1: AbstractUnicodeString, 2: string, 3: string, 4: \DateTime, 5: User, 6: array<Tag>}>
-     */
+     * @return array<int,array<int,mixed>>*/
     private function getPostData(): array
     {
         $posts = [];
@@ -146,7 +215,7 @@ final class AppFixtures extends Fixture
                 $this->slugger->slug($title)->lower(),
                 $this->getRandomText(),
                 $this->getPostContent(),
-                (new \DateTime('now - '.$i.'days'))->setTime(random_int(8, 17), random_int(7, 49), random_int(0, 59)),
+                (new \DateTime('now - ' . $i . 'days'))->setTime(random_int(8, 17), random_int(7, 49), random_int(0, 59)),
                 // Ensure that the first post is written by Jane Doe to simplify tests
                 $user,
                 $this->getRandomTags(),
@@ -261,7 +330,7 @@ final class AppFixtures extends Fixture
 
         return array_map(function ($tagName) {
             /** @var Tag $tag */
-            $tag = $this->getReference('tag-'.$tagName);
+            $tag = $this->getReference('tag-' . $tagName);
 
             return $tag;
         }, $selectedTags);
