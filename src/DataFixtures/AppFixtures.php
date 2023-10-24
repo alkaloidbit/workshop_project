@@ -43,11 +43,11 @@ final class AppFixtures extends Fixture
 
     private function loadSituations(ObjectManager $manager): void
     {
-        foreach ($this->getSituationData() as $key => $situation) {
+        foreach ($this->getSituationData() as $key => $situationData) {
             $situation = new Situation();
-            $situation->setQuestion($situation[0]);
-            $situation->setExplanation($situation[1]);
-            $situation->setImageName($situation[2]);
+            $situation->setQuestion($situationData[0]);
+            $situation->setExplanation($situationData[1]);
+            $situation->setImageName($situationData[2]);
 
             $manager->persist($situation);
             $this->addReference('situation' . '_' . $key, $situation);
@@ -59,10 +59,10 @@ final class AppFixtures extends Fixture
     private function loadAnswers(ObjectManager $manager): void
     {
         foreach ($this->getAnswerData() as $key => $answers) {
-            foreach ($answers as $answer) {
+            foreach ($answers as $answerData) {
                 $answer = new Answer();
-                $answer->setContent($answer[0]);
-                $answer->setValid($answer[1]);
+                $answer->setContent($answerData[0]);
+                $answer->setValid($answerData[1]);
                 $answer->setSituation($this->getReference('situation_' . $key));
 
                 $manager->persist($answer);
