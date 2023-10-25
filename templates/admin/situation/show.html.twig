@@ -11,7 +11,7 @@
     </p>
 
     <div>
-      <img src="{{ asset('uploads/images/' ~ situation.imageName) }}" alt="">
+      <img src="{{ asset('uploads/images/' ~ situation.imageName) | imagine_filter('squared_thumbnail_medium') }}" alt="">
     </div>
 
     <div class="jumbotron">

@@ -53,12 +53,10 @@ final class SituationType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class, [
                 'required' => false,
-                'allow_delete' => true,
+                'allow_delete' => false,
                 'delete_label' => 'Remove image',
                 'asset_helper' => true,
-                'download_uri' => static function () {
-                    return 'blablablablablablablabla';
-                },
+                'download_uri' => false,
                 'download_label' => 'Download image',
                 'image_uri' => true,
                 'imagine_pattern' => 'squared_thumbnail_small',

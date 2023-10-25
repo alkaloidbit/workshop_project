@@ -12,8 +12,26 @@
 {% endif %}
 
 {{ form_start(form, {attr: attr|default({})}) }}
-    {{ form_widget(form) }}
-
+  {{ form_row(form.question, {
+    label: 'Question'
+  }) }}
+  {{ form_row(form.explanation, {
+    label: 'Explanation'
+  }) }}
+  <div class="row">
+    <div class="col-sm-9">
+      {{ form_row(form.imageFile, {
+        attr: {
+          'placeholder': 'Select an image'
+        }
+      }) }} 
+    </div>
+    <div class="col-sm-3">
+      {% if form.vars.data.imageFile %}
+        <img src="{{ asset('uploads/images/' ~ form.vars.data.imageName) | imagine_filter('squared_thumbnail_small') }}" alt="">
+      {% endif %}
+    </div>
+  </div>
     <button type="submit" class="{{ button_css|default("btn btn-primary") }}">
         <i class="fa fa-save" aria-hidden="true"></i> {{ button_label|default('label.create_post'|trans) }}
     </button>

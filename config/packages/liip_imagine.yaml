@@ -10,3 +10,10 @@ liip_imagine:
           size: [160, 100]
           mode: outbond
           allow_upscale: true
+
+    squared_thumbnail_medium:
+      filters:
+        thumbnail:
+          size: [320, 200]
+          mode: outbond
+          allow_upscale: true
